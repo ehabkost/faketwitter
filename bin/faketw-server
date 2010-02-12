@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+
+import faketwitter.resources
+import faketwitter.server
+import twisted.web.server
+from twisted.internet import reactor
+
+server = faketwitter.server.TwitterServer()
+res = faketwitter.resources.TwitterResource(server)
+site = twisted.web.server.Site(res)
+
+reactor.listenTCP(8080, site)
+reactor.run()
